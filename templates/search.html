@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div>
+        <hr />
+
+        <h1>Search Results</h1>
+        
+
+        <div>
+            <br>
+            <form method="POST">
+                <input type="text" autofocus="autofocus" name="search_string">
+                <input type="submit" formaction="/search" value="Search">
+            </form>
+            <br>
+        </div>
+        <hr />
+        <div>
+            Click to download
+            <table>
+                <tr>
+                    <th>file</th>
+                    <th>date</th>
+                </tr>
+                {% for file in filenames %}
+                <tr>
+                    <td> <a href="{{file.url}}" download>{{file.name}}</a></td>
+                    <td> {{file.created_date}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <hr />
+
+        </div>
+    </div>
+</body>
+
+</html>

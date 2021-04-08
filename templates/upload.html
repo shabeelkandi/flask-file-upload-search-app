@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div>
+        <hr />
+
+        {%- for category, message in get_flashed_messages(with_categories = true) %}
+        <div>
+            {{ message }}
+        </div>
+        {%- endfor %}
+
+
+
+        <h1>Upload new File</h1>
+        <form method=post enctype=multipart/form-data>
+            <input type=file name=file>
+            <input type=submit value=Upload>
+        </form>
+
+        <div>
+            <br>
+            <form method="POST">
+                <input type="text" autofocus="autofocus" name="search_string">
+                <input type="submit" formaction="/search" value="Search">
+            </form>
+            <br>
+        </div>
+        <hr />
+        <div>
+            Click to download
+            <table>
+                <tr>
+                    <th>file</th>
+                    <th>date</th>
+                </tr>
+                {% for file in filenames %}
+                <tr>
+                    <td> <a href="{{file.url}}" download>{{file.name}}</a></td>
+                    <td> {{file.created_date}}</td>
+                    <td> <form method="post" action="delete/{{file.id}}">
+                            <input class="btn" type="submit" name="delete" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <hr />
+
+        </div>
+    </div>
+</body>
+
+</html>
